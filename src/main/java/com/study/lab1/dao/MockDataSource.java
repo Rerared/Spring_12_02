@@ -2,12 +2,13 @@ package com.study.lab1.dao;
 
 import com.study.lab1.model.Account;
 import com.study.lab1.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class MockDataSource {
     private List<Account> accounts = new ArrayList<>();
     private List<User> users = new ArrayList<>();
@@ -23,10 +24,10 @@ public class MockDataSource {
     }
 
     public void updateAccount(Account account) {
-        Account accountToUpdate = accounts.stream().filter(i -> i.getId() == account.getId()).findAny().orElse(null);
-        if (accountToUpdate != null) {
-            accountToUpdate.setBalance(account.getBalance());
-        }
+        accounts.stream()
+                .filter(i -> i.getId() == account.getId())
+                .findAny()
+                .ifPresent(accountToUpdate -> accountToUpdate.setBalance(account.getBalance()));
     }
 
     public Account getAccount(long id) {

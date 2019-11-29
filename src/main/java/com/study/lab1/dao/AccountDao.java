@@ -1,9 +1,13 @@
 package com.study.lab1.dao;
 
 import com.study.lab1.model.Account;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class AccountDao {
-    private MockDataSource dataSource = new MockDataSource();
+    @Autowired
+    private MockDataSource dataSource;
 
     public Account get(long id) {
         long start = System.currentTimeMillis();
